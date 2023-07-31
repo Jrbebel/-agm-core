@@ -1,0 +1,78 @@
+{
+  "private": false,
+  "name": "google-maps-autocomplete",
+  "version": "4.0.0-beta-4",
+  "description": "Angular components for Google Maps",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jrbebel/angular-google-maps.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "keywords": [
+    "angular",
+    "ng",
+    "google-maps",
+    "maps",
+    "google",
+    "gmaps"
+  ],
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "clean": "rimraf dist node_modules/@agm",
+    "prebuild": "yarn clean",
+    "build": "ng build core && ng build markerclusterer && ng build snazzy-info-window && ng build drawing",
+    "build:prod": "ng build core --configuration production && ng build markerclusterer --configuration production && ng build snazzy-info-window --configuration production && ng build drawing --configuration production",
+    "lint": "ng lint",
+    "test": "jest",
+    "test:watch": "jest --watchAll",
+    "ci": "yarn build:prod && yarn test --coverage",
+    "docs:clean": "rimraf docs/public",
+    "docs:hugo": "cd docs && hugo",
+    "docs:injectga": "node scripts/inject-google-analytics.js",
+    "docs": "yarn docs:hugo && yarn apidocs:core && yarn apidocs:snazzy && yarn apidocs:markerclusterer && yarn apidocs:drawing",
+    "apidocs:core": "compodoc -p packages/core/tsconfig.lib.json --name @agm/core --output docs/public/api-docs/agm-core/  --hideGenerator --disableCoverage",
+    "apidocs:snazzy": "compodoc -p packages/snazzy-info-window/tsconfig.lib.json --name @agm/snazzy-info-window  --output docs/public/api-docs/agm-snazzy-info-window/ --hideGenerator --disableCoverage",
+    "apidocs:markerclusterer": "compodoc -p packages/markerclusterer/tsconfig.lib.json --name @agm/markerclusterer  --output docs/public/api-docs/markerclusterer/ --hideGenerator --disableCoverage",
+    "apidocs:drawing": "compodoc -p packages/drawing/tsconfig.lib.json --name @agm/drawing  --output docs/public/api-docs/drawing/ --hideGenerator --disableCoverage"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SebastianM/angular-google-maps/issues"
+  },
+  "homepage": "https://angular-maps.com",
+  "dependencies": {
+    "@angular/animations": "^15.2.9",
+    "@angular/common": "^15.2.9",
+    "@angular/compiler": "^15.2.9",
+    "@angular/core": "^15.2.9",
+    "@angular/forms": "^15.2.9",
+    "@angular/platform-browser": "^15.2.9",
+    "@angular/platform-browser-dynamic": "^15.2.9",
+    "@angular/router": "^15.2.9",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.4.0",
+    "zone.js": "~0.12.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^15.2.8",
+    "@angular/cli": "^15.2.8",
+    "@angular/compiler-cli": "^15.2.9",
+    "@compodoc/compodoc": "^1.1.20",
+    "@types/jest": "^28.0.0",
+    "@types/node": "^18.15.3",
+    "codelyzer": "^6.0.2",
+    "conventional-changelog": "^3.1.25",
+    "jest": "^28.0.0",
+    "jest-preset-angular": "^12.2.6",
+    "ng-packagr": "^15.2.2",
+    "rimraf": "^4.4.1",
+    "ts-node": "~10.9.1",
+    "tslint": "~6.1.0",
+    "typescript": "~4.9.5",
+    "yarn": "^1.22.19"
+  }
+}
